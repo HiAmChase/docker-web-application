@@ -46,9 +46,22 @@ services:
     ports:
       - 8080:8080
 
-  client-react-nginx:
+  client-react:
     image: client-react:1
-    container_name: client-react-nginx
+    container_name: client-react
+    volumes:
+      - ./client-react/vite.config.js:/usr/src/app/vite.config.js
+    ports:
+      - 5173:5173
+    links:
+      - api-node
+      - api-golang
+    networks:
+      - frontend
+
+  client-nginx:
+    image: client-nginx:1
+    container_name: client-nginx
     ports:
       - 80:8080
     links:
