@@ -20,6 +20,21 @@ services:
     networks:
       - backend
 
+  api-node:
+    image: api-node:1
+    container_name: api-node
+    ports:
+      - 3000:3000
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+    depends_on:
+      db:
+        condition: service_healthy
+    links:
+      - db
+    networks:
+      - backend
+
 volumes:
   pg-data:
 networks:
