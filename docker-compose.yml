@@ -36,6 +36,11 @@ services:
     <<: *x-api-common
     image: api-node:1
     container_name: api-node
+    volumes:
+      # bind volume
+      - ./api-node:/usr/src/app
+      # anonymous volume
+      - /usr/src/app/node_modules
     ports:
       - 3000:3000
 

@@ -1,10 +1,22 @@
-FROM node:19.6-alpine
+FROM node:19.6-alpine AS base
 
 WORKDIR /usr/src/app
 
-ENV NODE_ENV production
-
 COPY package*.json ./
+
+FROM base AS dev
+
+RUN --mount=type=cache,target=/usr/src/app/.npm \
+    npm set cache /usr/src/app/.npm && \
+    npm install
+
+COPY . .
+
+CMD ["npm", "run", "dev"]
+
+FROM base AS production
+
+ENV NODE_ENV production
 
 RUN --mount=type=cache,target=/usr/src/app/.npm \
     npm set cache /usr/src/app/.npm && \
