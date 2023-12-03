@@ -50,7 +50,11 @@ services:
     image: client-react:1
     container_name: client-react
     volumes:
+      # bind volume
+      - ./client-react:/usr/src/app
       - ./client-react/vite.config.js:/usr/src/app/vite.config.js
+      # anonymous volume
+      - /usr/src/app/node_modules
     ports:
       - 5173:5173
     links:
