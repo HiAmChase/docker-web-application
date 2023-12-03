@@ -11,6 +11,12 @@ services:
       - POSTGRES_PASSWORD=H6CcA5SeyB49G0qhMkrW
     volumes:
       - pg-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "root"]
+      interval: 10s
+      retries: 5
+      start_period: 5s
+    restart: always
     networks:
       - backend
 
