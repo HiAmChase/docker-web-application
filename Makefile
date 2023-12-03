@@ -8,6 +8,9 @@ REACT_IMAGE:=client-react
 NGINX_IMAGE:=client-nginx
 TAG:=1
 
+COMPOSE_FILE:=docker-compose.yml
+COMPOSE_TEST_FILE:=docker-compose-test.yml
+
 export DATABASE_URL:=postgres://root:H6CcA5SeyB49G0qhMkrW@db:5432/postgres
 
 build-node:
@@ -24,3 +27,6 @@ build-nginx:
 
 run:
 	docker compose up -d
+
+run-test:
+	docker compose -f ${COMPOSE_FILE} -f ${COMPOSE_TEST_FILE} up ${NODE_IMAGE} ${GOLANG_IMAGE}

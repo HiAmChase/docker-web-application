@@ -1,0 +1,7 @@
+version: "3"
+services:
+  api-node:
+    command: ["npm", "run", "test"]
+  
+  api-golang:
+    command: ["go", "test", "-v", "./..."]
